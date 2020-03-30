@@ -34,3 +34,30 @@ class Categori(models.Model):
 
     def __str__(self):
         return self.type
+
+class Auction(models.Model):
+    title = models.CharField(max_length=120)
+    description = models.TextField()
+    vender = models.ForeignKey(Vender, on_delete=models.CASCADE)
+    categori = models.ForeignKey(Categori, on_delete=models.CASCADE)
+    start_date=models.DateTimeField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField (Default=false)
+
+    def __str__(self):
+        return self.title
+
+
+class Item(models.Model):
+    name = models.CharField(max_length=120)
+    start_price = models.DecimalField(max_digits=12, decimal_places=3)
+	image = models.ImageField(null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField (Default=false)
+
+    def __str__(self):
+        return self.name
+
+    @property
+	def display_price(self):
+		return "%s KD" % self.price
