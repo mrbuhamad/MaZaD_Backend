@@ -1,5 +1,5 @@
 from rest_framework.generics import CreateAPIView,ListAPIView
-from .serializers import *
+from datetime import datetime
 
 #  Models
 from .models import *
@@ -21,7 +21,7 @@ class CategoryView(ListAPIView):
 
 # ---  Categor  views   ----#
 class AuctionListView(ListAPIView):
-	queryset = Auction.objects.all()
+	queryset = Auction.objects.filter(start_date__gte=datetime.now()).order_by('start_date')
 	serializer_class = AuctionSerializer
 
 
