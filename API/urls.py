@@ -5,9 +5,11 @@ from .views import *
 
 urlpatterns = [
 
-    # path('login/', TokenObtainPairView.as_view() , name='login'),
+    path('login/', TokenObtainPairView.as_view() , name='login'),
 
     #  #  ----  registration urls ----  # 
-    # path('register/', UserCreateAPIView.as_view(), name='register'),
+    path('register/', UserCreateAPIView.as_view(), name='register'),
+    
+    ]
 
     

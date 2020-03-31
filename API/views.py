@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from rest_framework.generics import CreateAPIView
+from .serializers import *
 
-# Create your views here.
+#  Models
+from .models import *
+
+
+
+
+class UserCreateAPIView(CreateAPIView):
+	serializer_class = UserCreateSerializer
+
