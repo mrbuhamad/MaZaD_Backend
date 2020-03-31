@@ -56,8 +56,8 @@ class Auction(models.Model):
 	active = models.BooleanField (null=True)
 
 	#----- below fields changes by signals----#
-	started_at = models.DateTimeField(null=True)
-	ended_at=models.DateTimeField(null=True)
+	started_at = models.DateTimeField(blank=True)
+	ended_at=models.DateTimeField(blank=True)
 
 	def __str__(self):
 		return self.title
