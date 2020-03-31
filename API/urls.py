@@ -9,6 +9,10 @@ urlpatterns = [
 
     #  #  ----  registration urls ----  # 
     path('register/', UserCreateAPIView.as_view(), name='register'),
+
+
+    path('category/', CategoryView.as_view(), name='category'),
+    path('Auction/', AuctionListView.as_view(), name='auction'),
     
     ]
 
