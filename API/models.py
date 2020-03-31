@@ -51,7 +51,7 @@ class Auction(models.Model):
 	title = models.CharField(max_length=120)
 	description = models.TextField()
 	vender = models.ForeignKey(Vender, on_delete=models.CASCADE)
-	category = models.ForeignKey(Category, on_delete=models.CASCADE)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1)
 	start_date=models.DateTimeField()
 	active = models.BooleanField (null=True)
 
@@ -69,7 +69,7 @@ class Item(models.Model):
 	image = models.ImageField(null=True)
 	created_on = models.DateTimeField(auto_now_add=True)
 	active = models.BooleanField (default=False)
-	auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
+	auction = models.ForeignKey(Auction, on_delete=models.CASCADE, default=1)
 
 
 	def __str__(self):
