@@ -23,7 +23,7 @@ class Addres(models.Model):
 
 class Bidder(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
-	addres= models.ForeignKey(Addres, on_delete=models.CASCADE, null=True)
+	addres= models.ForeignKey(Addres, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.user.username
@@ -31,7 +31,7 @@ class Bidder(models.Model):
 
 class Vender(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
-	addres= models.ForeignKey(Addres, on_delete=models.CASCADE, null=True)
+	addres= models.ForeignKey(Addres, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.user.username
@@ -51,13 +51,13 @@ class Auction(models.Model):
 	title = models.CharField(max_length=120)
 	description = models.TextField()
 	vender = models.ForeignKey(Vender, on_delete=models.CASCADE)
-	category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	start_date=models.DateTimeField()
 	active = models.BooleanField (null=True)
 
 	#----- below fields changes by signals----#
-	started_at = models.DateTimeField(blank=True, null=True)
-	ended_at=models.DateTimeField(blank=True, null=True)
+	started_at = models.DateTimeField(blank=True)
+	ended_at=models.DateTimeField(blank=True)
 
 	def __str__(self):
 		return self.title
@@ -68,8 +68,8 @@ class Item(models.Model):
 	start_price = models.DecimalField(max_digits=12, decimal_places=3)
 	image = models.ImageField(null=True)
 	created_on = models.DateTimeField(auto_now_add=True)
-	active = models.BooleanField (default=False)
-	auction = models.ForeignKey(Auction, on_delete=models.CASCADE, null=True)
+	active = models.BooleanField (default=null)
+	auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
 
 
 	def __str__(self):
@@ -84,8 +84,10 @@ class Item(models.Model):
 class Bid(models.Model):
 	bid_price = models.DecimalField(max_digits=12, decimal_places=3)
 	created_on = models.DateTimeField(auto_now_add=True)
-	item = models.ForeignKey(Item, on_delete=models.CASCADE,null=True)
-	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE ,null=True)
+	item = models.ForeignKey(Item, on_delete=models.CASCADE)
+	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE )
+	#----- below fields changes by signals----#
+	winner= models.BooleanField (default=False)
 
 	def __str__(self):
 		return f'{self.item} -- {self.bid_price}'
@@ -107,3 +109,13 @@ def get_started_at(instance, *args, **kwargs):
 def get_ended_at(instance, *args, **kwargs):
 	if instance.active==False:
 		instance.ended_at=datetime.now()
+
+
+#-------------- singnel to populate winner bid  ------------- #
+@receiver(pre_save, sender=Item)
+def get_ended_at(instance, *args, **kwargs):
+	if instance.active==False:
+		wining_bid=instance.bid.objects.all().order_by('bid_price')
+		
+		wining_bid.winner=True
+		wining_bid.save()

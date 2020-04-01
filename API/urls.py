@@ -16,7 +16,11 @@ urlpatterns = [
 # ---  Auction urls   ----#
     path('auction/', AuctionListView.as_view(), name='auction'),
     path('auction/create', CreateAuctionView.as_view(), name='auction_create'),
+
+# ---  item urls   ----#    
     path('item/create', CreateItemView.as_view(), name='item_create'),
+
+   
     path('bid/create', CreateBidView.as_view(), name='bid_create'),
     
     ]

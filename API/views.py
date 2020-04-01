@@ -30,21 +30,20 @@ class CreateAuctionView(CreateAPIView):
 	serializer_class=CreateAuctionSerializer
 
 	def perform_create(self, serializer):
-		serializer.save(user=self.request.user)
+		serializer.save(vender=self.request.user.vender)
 
 # -----  item  views   ------#
 class CreateItemView(CreateAPIView):
 	serializer_class=CreateItemSerializer
 	
-	def perform_create(self, serializer):
-		serializer.save(user=self.request.user)
+
 
 # -----  bid  views   ------#
 class CreateBidView(CreateAPIView):
 	serializer_class=CreateBidSerializer
 	
 	def perform_create(self, serializer):
-		serializer.save(user=self.request.user)
+		serializer.save(bidder=self.request.user.bidder)
 
 
 
