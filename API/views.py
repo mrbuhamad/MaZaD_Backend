@@ -36,8 +36,7 @@ class CreateAuctionView(CreateAPIView):
 class CreateItemView(CreateAPIView):
 	serializer_class=CreateItemSerializer
 	
-	def perform_create(self, serializer):
-		serializer.save(vender=self.request.user.vender)
+
 
 # -----  bid  views   ------#
 class CreateBidView(CreateAPIView):

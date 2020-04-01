@@ -47,13 +47,13 @@ class CreateAuctionSerializer(serializers.ModelSerializer):
 
 class CreateItemSerializer(serializers.ModelSerializer):
     class  Meta:
-        model= Auction
-        fields = ['name','start_price','image','auction',]
+        model= Item
+        fields = ['name','start_price','image',"auction"]
 
 
 class CreateBidSerializer(serializers.ModelSerializer):
     class  Meta:
-        model= Auction
+        model= Bid
         fields = ['bid_price','item','bidder']
 
   
