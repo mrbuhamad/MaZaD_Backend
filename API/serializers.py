@@ -20,3 +20,40 @@ class UserCreateSerializer(serializers.ModelSerializer):
         new_user.save()
         print(validated_data)
         return validated_data
+
+
+
+# ---  Category Serializers   ----#
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['name', 'image', ]
+
+
+# ---  Auction Serializers   ----#
+
+class AuctionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Auction
+        fields = "__all__"
+
+
+class CreateAuctionSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['title','description','category','start_date',]
+
+
+class CreateItemSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['name','start_price','image','auction',]
+
+
+class CreateBidSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['bid_price','item','bidder']
+
+  
