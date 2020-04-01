@@ -12,7 +12,12 @@ urlpatterns = [
 
 
     path('category/', CategoryView.as_view(), name='category'),
-    path('Auction/', AuctionListView.as_view(), name='auction'),
+
+# ---  Auction urls   ----#
+    path('auction/', AuctionListView.as_view(), name='auction'),
+    path('auction/create', CreateAuctionView.as_view(), name='auction_create'),
+    path('item/create', CreateItemView.as_view(), name='item_create'),
+    path('bid/create', CreateBidView.as_view(), name='bid_create'),
     
     ]
 

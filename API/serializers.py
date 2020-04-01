@@ -24,6 +24,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
 
 # ---  Category Serializers   ----#
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -31,7 +32,28 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 # ---  Auction Serializers   ----#
+
 class AuctionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Auction
         fields = "__all__"
+
+
+class CreateAuctionSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['title','description','category','start_date',]
+
+
+class CreateItemSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['name','start_price','image','auction',]
+
+
+class CreateBidSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['bid_price','item','bidder']
+
+  
