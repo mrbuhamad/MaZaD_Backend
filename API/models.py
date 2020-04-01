@@ -68,7 +68,7 @@ class Item(models.Model):
 	start_price = models.DecimalField(max_digits=12, decimal_places=3)
 	image = models.ImageField(null=True)
 	created_on = models.DateTimeField(auto_now_add=True)
-	active = models.BooleanField (default=False)
+	active = models.BooleanField (default=null)
 	auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
 
 
@@ -86,6 +86,8 @@ class Bid(models.Model):
 	created_on = models.DateTimeField(auto_now_add=True)
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE )
+	#----- below fields changes by signals----#
+	winner= models.BooleanField (default=False)
 
 	def __str__(self):
 		return f'{self.item} -- {self.bid_price}'
@@ -107,3 +109,13 @@ def get_started_at(instance, *args, **kwargs):
 def get_ended_at(instance, *args, **kwargs):
 	if instance.active==False:
 		instance.ended_at=datetime.now()
+
+
+#-------------- singnel to populate winner bid  ------------- #
+@receiver(pre_save, sender=Item)
+def get_ended_at(instance, *args, **kwargs):
+	if instance.active==False:
+		wining_bid=instance.bid.objects.all().order_by('bid_price')
+		
+		wining_bid.winner=True
+		wining_bid.save()
