@@ -86,6 +86,7 @@ class Bid(models.Model):
 	created_on = models.DateTimeField(auto_now_add=True)
 	item = models.ForeignKey(Item, on_delete=models.CASCADE,null=True)
 	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE,null=True )
+	
 	#----- below fields changes by signals----#
 	winner= models.BooleanField (default=False)
 
@@ -100,6 +101,7 @@ class Bid(models.Model):
 
 
 #-------------- singnel to populate Auction.started_at & ended_at  ------------- #
+
 @receiver(pre_save, sender=Auction)
 def get_started_at(instance, *args, **kwargs):
 	if instance.active==True:
@@ -112,6 +114,7 @@ def get_ended_at(instance, *args, **kwargs):
 
 
 #-------------- singnel to populate winner bid  ------------- #
+
 @receiver(pre_save, sender=Item)
 def get_ended_at(instance, *args, **kwargs):
 	if instance.active==False:
