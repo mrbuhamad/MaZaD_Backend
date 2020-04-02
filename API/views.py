@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView,ListAPIView
+from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView
 from datetime import datetime
 
 #  Models
@@ -33,12 +33,26 @@ class CreateAuctionView(CreateAPIView):
 		serializer.save(vender=self.request.user.vender)
 
 # -----  item  views   ------#
+
+class ItemListView(RetrieveAPIView):
+	queryset = Auction.objects.all()
+	serializer_class = ItemListSerializer
+	lookup_field="id"
+	lookup_url_kwarg="auction_id"
+
 class CreateItemView(CreateAPIView):
 	serializer_class=CreateItemSerializer
 	
 
 
 # -----  bid  views   ------#
+class BidListView(RetrieveAPIView):
+	queryset = Item.objects.all()
+	serializer_class = BidListSerializer
+	lookup_field="id"
+	lookup_url_kwarg="item_id"
+
+
 class CreateBidView(CreateAPIView):
 	serializer_class=CreateBidSerializer
 	
