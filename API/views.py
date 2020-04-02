@@ -46,6 +46,7 @@ class CreateItemView(CreateAPIView):
 
 
 # -----  bid  views   ------#
+
 class BidListView(RetrieveAPIView):
 	queryset = Item.objects.all()
 	serializer_class = BidListSerializer
