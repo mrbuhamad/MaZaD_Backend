@@ -25,6 +25,8 @@ urlpatterns = [
     # start_date should be formated as [2021-10-22T18:17:51]
     path('auction/create', CreateAuctionView.as_view(), name='auction_create'),
 
+ 	# URL for start/end auction butten update (active = True to start) update (active = False to end)
+	path('auction/<int:auction_id>/status', AuctionStatusView.as_view(), name='auction_status'),
 
     # # --------------------  item urls   ---------------------#   
 
@@ -33,6 +35,10 @@ urlpatterns = [
 
     # item create with the folowing requierd feild ['name','start_price','image',"auction"]
     path('item/create', CreateItemView.as_view(), name='item_create'),
+
+
+    # URL for start/end Item auction butten update (active = True to start) update (active = False to end)
+	path('item/<int:item_id>/status', AuctionStatusView.as_view(), name='item_status'),
 
 
     # # --------------------  bid urls   ---------------------#    

@@ -45,6 +45,14 @@ class CreateAuctionSerializer(serializers.ModelSerializer):
         fields = ['title','description','category','start_date',]
 
 
+
+class AuctionStatusSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['active']
+
+
+
 # ---  item Serializers   ----#
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -70,6 +78,14 @@ class CreateItemSerializer(serializers.ModelSerializer):
     class  Meta:
         model= Item
         fields = ['name','start_price','image',"auction"]
+
+
+
+class ItemStatusSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Item
+        fields = ['active']
+
 
 
 # ---  bid Serializers   ----#

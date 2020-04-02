@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView
+from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView,RetrieveUpdateAPIView
 from datetime import datetime
 
 #  Models
@@ -32,6 +32,15 @@ class CreateAuctionView(CreateAPIView):
 	def perform_create(self, serializer):
 		serializer.save(vender=self.request.user.vender)
 
+
+class AuctionStatusView(RetrieveUpdateAPIView):
+    queryset = Auction.objects.all()
+    serializer_class = AuctionStatusSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'auction_id'
+
+
+
 # -----  item  views   ------#
 
 class ItemListView(RetrieveAPIView):
@@ -40,8 +49,16 @@ class ItemListView(RetrieveAPIView):
 	lookup_field="id"
 	lookup_url_kwarg="auction_id"
 
+
 class CreateItemView(CreateAPIView):
 	serializer_class=CreateItemSerializer
+
+
+class ItemStatusView(RetrieveUpdateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemStatusSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'item_id'
 	
 
 

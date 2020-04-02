@@ -116,7 +116,6 @@ def get_ended_at(instance, *args, **kwargs):
 def get_ended_at(instance, *args, **kwargs):
 	if instance.active==False:
 		wining_bid=instance.bid_set.all().order_by('-bid_price')[0]
-		
 		wining_bid.winner=True
 		wining_bid.save()
 
