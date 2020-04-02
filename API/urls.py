@@ -18,7 +18,7 @@ urlpatterns = [
     path('auction/create', CreateAuctionView.as_view(), name='auction_create'),
 
 # ---  item urls   ----#    
-	path('auction/item', CreateItemView.as_view(), name='item_list'),
+	path('auction/<int:auction_id>/item', ItemListView.as_view(), name='item_list'),
     path('item/create', CreateItemView.as_view(), name='item_create'),
 
   # ---  bid urls   ----#     
