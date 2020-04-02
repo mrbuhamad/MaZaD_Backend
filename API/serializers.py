@@ -51,6 +51,28 @@ class CreateItemSerializer(serializers.ModelSerializer):
         fields = ['name','start_price','image',"auction"]
 
 
+# ---  bid Serializers   ----#
+
+class BidSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Bid
+        fields = "__all__"
+
+
+
+class BidLListSerializer(serializers.ModelSerializer):
+    bid_list=serializers.SerializerMethodField()
+
+    class Meta:
+        model = Item
+        fields = "bid_list"
+
+    def get_bid_list(self,obj):
+        bid_list=Bid.objects.filter(item=obj.id)
+        return BidSerializer(bid_list, many=True).data
+
+
+
 class CreateBidSerializer(serializers.ModelSerializer):
     class  Meta:
         model= Bid

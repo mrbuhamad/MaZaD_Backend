@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView,ListAPIView
+from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView
 from datetime import datetime
 
 #  Models
@@ -39,6 +39,13 @@ class CreateItemView(CreateAPIView):
 
 
 # -----  bid  views   ------#
+class BidListView(RetrieveAPIView):
+	queryset = Item.objects.all()
+	serializer_class = BidLListSerializer
+	lookup_field="id"
+	lookup_url_kwarg="item_id"
+
+
 class CreateBidView(CreateAPIView):
 	serializer_class=CreateBidSerializer
 	
