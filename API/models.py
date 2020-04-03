@@ -122,4 +122,19 @@ def get_ended_at(instance, *args, **kwargs):
 		wining_bid.winner=True
 		wining_bid.save()
 
-		# why instance.bid.objects.all().order_by('-bid_price')[0] not working ??
+
+
+
+#  -----  Auto matic email sender to winner bid ----
+@receiver(pre_save, sender=Bid)
+def get_winner(instance, *args, **kwargs):
+	if instance.winner==True:
+		Bidder_Email=instance.bidder.user.email
+		send_mail(
+   		'Mazad.com bid pyment',
+    	'congratulation you have one the bid',
+   		'pyment@Mazad.com',
+    	[Bidder_Email],
+   		fail_silently=False,
+)
+
