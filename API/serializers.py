@@ -45,6 +45,14 @@ class CreateAuctionSerializer(serializers.ModelSerializer):
         fields = ['title','description','category','start_date',]
 
 
+
+class AuctionStatusSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Auction
+        fields = ['active']
+
+
+
 # ---  item Serializers   ----#
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -66,10 +74,31 @@ class ItemListSerializer(serializers.ModelSerializer):
         return ItemSerializer(item_list, many=True).data
 
 
-class CreateItemSerializer(serializers.ModelSerializer):
+class ItemsListSerializer(serializers.ModelSerializer):
     class  Meta:
         model= Item
         fields = ['name','start_price','image',"auction"]
+
+
+
+class CreateItemSerializer(serializers.Serializer):
+    items = ItemsListSerializer(many=True)
+
+    def create(self, validated_data):
+        Item_list = validated_data.pop('items')
+        for item in Item_list:
+        	Item.objects.create(**item)
+        return Item_list
+      
+     
+
+
+
+class ItemStatusSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Item
+        fields = ['active']
+
 
 
 # ---  bid Serializers   ----#
