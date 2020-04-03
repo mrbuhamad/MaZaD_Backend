@@ -74,10 +74,23 @@ class ItemListSerializer(serializers.ModelSerializer):
         return ItemSerializer(item_list, many=True).data
 
 
-class CreateItemSerializer(serializers.ModelSerializer):
+class ItemsListSerializer(serializers.ModelSerializer):
     class  Meta:
         model= Item
         fields = ['name','start_price','image',"auction"]
+
+
+
+class CreateItemSerializer(serializers.Serializer):
+    items = ItemsListSerializer(many=True)
+
+    def create(self, validated_data):
+        Item_list = validated_data.pop('items')
+        for item in Item_list:
+        	Item.objects.create(**item)
+        return Item_list
+      
+     
 
 
 
