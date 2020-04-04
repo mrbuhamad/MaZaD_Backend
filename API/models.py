@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.core.mail import send_mail
 
 # Create your models here.
 
@@ -125,16 +126,21 @@ def get_ended_at(instance, *args, **kwargs):
 
 
 
-#  -----  Auto matic email sender to winner bid ----
+#  -----  Auto matic email sender to winner bid ---- #
+
 @receiver(pre_save, sender=Bid)
 def get_winner(instance, *args, **kwargs):
 	if instance.winner==True:
 		Bidder_Email=instance.bidder.user.email
 		send_mail(
    		'Mazad.com bid pyment',
-    	'congratulation you have one the bid',
-   		'pyment@Mazad.com',
+    	'congratulation you have won the bid :)',
+   		settings.EMAIL_HOST_USER,
     	[Bidder_Email],
    		fail_silently=False,
 )
 
+# for our email we will be using ne google email i created
+# email: mazad.payment@gmail.com
+# password: mazad2020
+#
