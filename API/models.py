@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your models here.
 
@@ -140,7 +141,7 @@ def get_winner(instance, *args, **kwargs):
    		fail_silently=False,
 )
 
-# for our email we will be using ne google email i created
+# for our email we will be using google email :
 # email: mazad.payment@gmail.com
 # password: mazad2020
 #
