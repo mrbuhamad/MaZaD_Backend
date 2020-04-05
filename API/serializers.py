@@ -26,8 +26,13 @@ class UserCreateSerializer(serializers.ModelSerializer):
         Bidder.objects.create(user=new_user)
         if vender==True:
             Vender.objects.create(user=new_user)
-        print(validated_data)
         return validated_data
+
+
+class AddresCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Addres
+        exclude = ['user']
 
 
 

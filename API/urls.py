@@ -6,10 +6,16 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 urlpatterns = [
 
     # #  -------------------  registration urls -------------------  # 
+
     path('login/', TokenObtainPairView.as_view() , name='login'),
     
+    # register url create a user with requierd feild
+    # venders is a boolean set it=True to make the user a venders ['username','password','first_name','last_name','email','vender'] 
+    # each user is automaticly a bidder
     path('register/', UserCreateAPIView.as_view(), name='register'),
 
+    # create adress for the logged in user requierd feild ['country', 'area', 'block', 'street', 'house']
+    path('addres/create', AddresCreateAPIView.as_view(), name='addres'),
 
     # #  --------------------  category urls   ---------------------#
 

@@ -8,16 +8,25 @@ from .models import *
 from .serializers import *
 
 
+# -----  user  views  ------#
 
 class UserCreateAPIView(CreateAPIView):
 	serializer_class = UserCreateSerializer
 
+
+class AddresCreateAPIView(CreateAPIView):
+	serializer_class = AddresCreateSerializer
+
+	def perform_create(self, serializer):
+		serializer.save(user=self.request.user)
 
 # -----  Categor  views  ------#
 
 class CategoryView(ListAPIView):
 	queryset = Category.objects.all()
 	serializer_class = CategorySerializer
+
+
 
 
 # -----  Auction  views   ------#

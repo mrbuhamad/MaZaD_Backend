@@ -15,6 +15,7 @@ class Addres(models.Model):
 	block=models.CharField(max_length=120)
 	street=models.CharField(max_length=120)
 	house=models.CharField(max_length=120)
+	user=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
 
 	def __str__(self):
@@ -25,7 +26,6 @@ class Addres(models.Model):
 
 class Bidder(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
-	addres= models.ForeignKey(Addres, on_delete=models.CASCADE,null=True)
 
 	def __str__(self):
 		return self.user.username
@@ -33,7 +33,6 @@ class Bidder(models.Model):
 
 class Vender(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
-	addres= models.ForeignKey(Addres, on_delete=models.CASCADE,null=True)
 
 	def __str__(self):
 		return self.user.username
