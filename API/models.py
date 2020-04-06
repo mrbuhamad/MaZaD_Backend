@@ -89,11 +89,18 @@ class Item(models.Model):
 
 
 class payment(models.Model):
-	Item = models.OneToOneField(Item, on_delete=models.CASCADE)
+	Item = models.OneToOneField(Item, on_delete=models.CASCADE,null=True)
 	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
 	pyment_status=models.CharField(max_length=120)
 	pyment_Ip=models.CharField(max_length=120)
 	pyment_datetime=models.DateTimeField()
+
+	def __str__(self):
+		return self.bidder.name
+
+class participant(models.Model):
+	bidder= models.ForeignKey(Bidder, on_delete=models.CASCADE)
+	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
 
 	def __str__(self):
 		return self.bidder.name
