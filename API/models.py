@@ -77,10 +77,6 @@ class Deposit(models.Model):
 
 
 
-
-		
-
-
 class Item(models.Model):
 	name = models.CharField(max_length=120)
 	start_price = models.DecimalField(max_digits=12, decimal_places=3)
