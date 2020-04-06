@@ -47,7 +47,6 @@ class Category(models.Model):
 		return self.name
 
 
-
 class Auction(models.Model):
 	title = models.CharField(max_length=120)
 	description = models.TextField()
@@ -64,12 +63,7 @@ class Auction(models.Model):
 	def __str__(self):
 		return self.title
 
-class Deposit(models.Model):
-	auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
-	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
 
-	def __str__(self):
-		return self.bidder.name
 
 
 # bidder cannot bid if he didnt make a deposit
@@ -93,6 +87,16 @@ class Item(models.Model):
 	def display_start_price(self):
 		return "%s KD" % self.price
 
+
+class payment(models.Model):
+	Item = models.OneToOneField(Item, on_delete=models.CASCADE)
+	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
+	pyment_status=models.CharField(max_length=120)
+	pyment_Ip=models.CharField(max_length=120)
+	pyment_datetime=models.DateTimeField()
+
+	def __str__(self):
+		return self.bidder.name
 
 
 class Bid(models.Model):

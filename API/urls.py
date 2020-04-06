@@ -47,12 +47,7 @@ urlpatterns = [
  	# URL for start/end auction butten update (active = True to start) update (active = False to end)
 	path('auction/<int:auction_id>/status', AuctionStatusView.as_view(), name='auction_status'),
 
-
-    # URL to create a deposit requierd:['auction'] bidder should be logged in 
-    path('auction/deposit', DepositCreateView.as_view(), name='deposit'),
-
  
-
 
 
     # # --------------------  item urls   ---------------------#   

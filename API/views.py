@@ -1,5 +1,15 @@
-from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView,RetrieveUpdateAPIView,DestroyAPIView
+from rest_framework.generics import (
+CreateAPIView,
+ListAPIView,
+RetrieveAPIView,
+RetrieveUpdateAPIView,
+DestroyAPIView)
 from datetime import datetime
+from rest_framework.permissions import(
+	AllowAny,
+	IsAuthenticated
+
+	)
 
 #  Models
 from .models import *
@@ -12,11 +22,12 @@ from .serializers import *
 
 class UserCreateAPIView(CreateAPIView):
 	serializer_class = UserCreateSerializer
+	permission_class= [AllowAny]
 
 
 class AddresCreateAPIView(CreateAPIView):
 	serializer_class = AddresCreateSerializer
-
+	rmission_class= [IsAuthenticated]
 	def perform_create(self, serializer):
 		serializer.save(user=self.request.user)
 
@@ -25,6 +36,7 @@ class AddresCreateAPIView(CreateAPIView):
 class CategoryView(ListAPIView):
 	queryset = Category.objects.all()
 	serializer_class = CategorySerializer
+	permission_class= [AllowAny]
 
 
 
@@ -34,6 +46,7 @@ class CategoryView(ListAPIView):
 class AuctionListView(ListAPIView):
 	queryset = Auction.objects.filter(start_date__gte=datetime.now()).order_by('start_date')
 	serializer_class = AuctionSerializer
+	permission_class= [AllowAny]
 
 class CreateAuctionView(CreateAPIView):
 	serializer_class=CreateAuctionSerializer
@@ -69,11 +82,6 @@ class DeleteAuctionView(DestroyAPIView):
 		serializer.save(vender=self.request.user.vender)
 
 
-class DepositCreateView(RetrieveUpdateAPIView):
-	serializer_class = DepositUpdateSerializer
-	
-	def perform_create(self, serializer):
-		serializer.save(bidder=self.request.user.bidder)
 
 
 # -----  item  views   ------#
