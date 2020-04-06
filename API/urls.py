@@ -9,17 +9,21 @@ urlpatterns = [
 
     path('login/', TokenObtainPairView.as_view() , name='login'),
     
-    # register url create a user with requierd feild
-    # venders is a boolean set it=True to make the user a venders ['username','password','first_name','last_name','email','vender'] 
+    # register url create a user with requierd feild : ['username','password','first_name','last_name','email','vender'] 
+    # venders is a boolean set it=True to make the user a venders 
     # each user is automaticly a bidder
     path('register/', UserCreateAPIView.as_view(), name='register'),
 
     # create adress for the logged in user requierd feild ['country', 'area', 'block', 'street', 'house']
     path('addres/create', AddresCreateAPIView.as_view(), name='addres'),
 
+
+
     # #  --------------------  category urls   ---------------------#
 
     path('category/', CategoryView.as_view(), name='category'),
+
+
 
 
     # #  --------------------  Auction urls   ---------------------#
@@ -42,7 +46,15 @@ urlpatterns = [
 
  	# URL for start/end auction butten update (active = True to start) update (active = False to end)
 	path('auction/<int:auction_id>/status', AuctionStatusView.as_view(), name='auction_status'),
+
+
+    # URL to create a deposit requierd:['auction'] bidder should be logged in 
+    path('auction/deposit', DepositCreateView.as_view(), name='deposit'),
+
  
+
+
+
     # # --------------------  item urls   ---------------------#   
 
      # item list for a specific auction - put auction_id in the url  
@@ -59,6 +71,8 @@ urlpatterns = [
 
     # URL for start/end Item auction butten update (active = True to start) update (active = False to end)
 	path('item/<int:item_id>/status', ItemStatusView.as_view(), name='item_status'),
+
+
 
 
     # # --------------------  bid urls   ---------------------#    

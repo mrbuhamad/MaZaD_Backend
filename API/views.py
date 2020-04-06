@@ -69,6 +69,13 @@ class DeleteAuctionView(DestroyAPIView):
 		serializer.save(vender=self.request.user.vender)
 
 
+class DepositCreateView(RetrieveUpdateAPIView):
+	serializer_class = DepositUpdateSerializer
+	
+	def perform_create(self, serializer):
+		serializer.save(bidder=self.request.user.bidder)
+
+
 # -----  item  views   ------#
 
 class ItemListView(RetrieveAPIView):
