@@ -60,7 +60,7 @@ urlpatterns = [
      # item list for a specific auction - put auction_id in the url  
 	path('auction/<int:auction_id>/item', ItemListView.as_view(), name='item_list'),
 
-    # item create with the folowing requierd feild ['name','start_price','image',"auction"]
+    # item create with the folowing requierd feild items=[{'name','start_price','image',"auction"},{.. .. ..}]
     path('item/create', CreateItemView.as_view(), name='item_create'),
 
     # item update with the folowing requierd feild ['name','start_price','image',"auction"]
