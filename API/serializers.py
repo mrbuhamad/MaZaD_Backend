@@ -103,10 +103,10 @@ class CreateItemSerializer(serializers.Serializer):
     items = ItemsListSerializer(many=True)
 
     def create(self, validated_data):
-        Item_list = validated_data.pop('items')
+        Item_list = validated_data.get('items')
         for item in Item_list:
         	Item.objects.create(**item)
-        return Item_list
+        return validated_data
       
      
 

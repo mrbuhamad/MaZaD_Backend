@@ -55,7 +55,7 @@ class Auction(models.Model):
 	category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True)
 	start_date=models.DateTimeField()
 	active = models.BooleanField (null=True)
-	req_deposit=models.forms.IntegerField(null=True,default=10)
+	req_deposit=models.IntegerField(null=True,default=10)
 
 	#----- below fields changes by signals----#
 	started_at = models.DateTimeField(blank=True,null=True)
@@ -64,9 +64,9 @@ class Auction(models.Model):
 	def __str__(self):
 		return self.title
 
-class deposit(models.Model)::
-	auction = models.OneToOneField(Auction, on_delete=models.CASCADE)
-	bidder = models.OneToOneField(Bidder, on_delete=models.CASCADE)
+class Deposit(models.Model):
+	auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
+	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.bidder.name
