@@ -65,10 +65,6 @@ class AuctionStatusSerializer(serializers.ModelSerializer):
         fields = ['active']
 
 
-class DepositUpdateSerializer(serializers.ModelSerializer):
-    class  Meta:
-        model= Deposit
-        fields = ['auction']
 
 
 # ---  item Serializers   ----#
