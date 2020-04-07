@@ -25,7 +25,7 @@ class IsVarifideBidder (BasePermission):
 	message = "bidder have to provide a varified pyment info"
 
 	def has_object_permission(self, request, view, obj):
-		if request.user.is_staff or (obj.user == request.user):
+		if request.user.is_staff or obj.user.participant.exists():
 			return True
 
 		return False

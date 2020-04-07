@@ -77,6 +77,11 @@ urlpatterns = [
 
     # bid create with the folowing requierd feild ['bid_price','item']
     path('item/bid/create', CreateBidView.as_view(), name='bid_create'),
+
+
+    # bid create with the folowing requierd feild ['bid_price','item']
+    path('item/payment/create', PaymentCreateView.as_view(), name='payment_create'),
+    
     
     ]
 

@@ -88,17 +88,20 @@ class Item(models.Model):
 		return "%s KD" % self.price
 
 
-class payment(models.Model):
+class Payment(models.Model):
 	Item = models.OneToOneField(Item, on_delete=models.CASCADE,null=True)
+	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
 	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
 	pyment_status=models.CharField(max_length=120)
 	pyment_Ip=models.CharField(max_length=120)
 	pyment_datetime=models.DateTimeField()
+	choices = (("par_charge", "par_charge"), ("item_pyment", "item_pyment"))
+	pyment_type= models.CharField(max_length=12, choices=choices,null=True)
 
 	def __str__(self):
 		return self.bidder.name
 
-class participant(models.Model):
+class Participant(models.Model):
 	bidder= models.ForeignKey(Bidder, on_delete=models.CASCADE)
 	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
 
@@ -138,16 +141,23 @@ def get_ended_at(instance, *args, **kwargs):
 		instance.ended_at=datetime.now()
 
 
-#-------------- singnel to populate winner bid  ------------- #
+#-------------- singnel to populate participant model  ------------- #
 
 @receiver(pre_save, sender=Item)
 def get_ended_at(instance, *args, **kwargs):
 	if instance.active==False:
+		instance.participant.create(bidder=instance.bidder ,auction=instance.auction)
+
+		
+
+
+#-------------- singnel to populate winner bid  ------------- #
+@receiver(pre_save, sender=Payment)
+def get_ended_at(instance, *args, **kwargs):
+	if instance.pyment_type=="par_charge":
 		wining_bid=instance.bid_set.all().order_by('-bid_price')[0]
 		wining_bid.winner=True
 		wining_bid.save()
-
-
 
 
 #  -----  Auto matic email sender to winner bid ---- #
@@ -168,3 +178,6 @@ def get_winner(instance, *args, **kwargs):
 # email: mazad.payment@gmail.com
 # password: mazad2020
 #
+
+
+

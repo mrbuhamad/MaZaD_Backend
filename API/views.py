@@ -150,5 +150,10 @@ class CreateBidView(CreateAPIView):
 
 
 
+class PaymentCreateView(CreateAPIView):
+	permission_class= [IsAuctionOwner]
+	serializer_class=PaymentCreateSerializer
+
+
 
 	

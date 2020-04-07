@@ -135,8 +135,6 @@ class BidListSerializer(serializers.ModelSerializer):
         bid_list=Bid.objects.filter(item=obj.id)
         return BidSerializer(bid_list, many=True).data
 
-#  what is many=true do ?   why do we add .data at the end
-
 
 
 class CreateBidSerializer(serializers.ModelSerializer):
@@ -144,4 +142,11 @@ class CreateBidSerializer(serializers.ModelSerializer):
         model= Bid
         fields = ['bid_price','item']
 
+
+
+
+class PaymentCreateSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Bid
+        fields = "__all__"
   
