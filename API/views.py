@@ -5,10 +5,12 @@ RetrieveAPIView,
 RetrieveUpdateAPIView,
 DestroyAPIView)
 from datetime import datetime
+
+# permissions
 from rest_framework.permissions import(
 	AllowAny,
 	IsAuthenticated)
-from .permissions import IsVender,IsAuctionOwner,IsVarifideBidder
+from .permissions import *
 
 #  Models
 from .models import *
@@ -51,7 +53,7 @@ class AuctionListView(ListAPIView):
 
 
 class CreateAuctionView(CreateAPIView):
-	permission_class= [IsVender]
+	permission_classes= [IsVender]
 	serializer_class=CreateAuctionSerializer
 
 	def perform_create(self, serializer):
@@ -152,7 +154,7 @@ class CreateBidView(CreateAPIView):
 
 class PaymentCreateView(CreateAPIView):
 	permission_class= [IsAuctionOwner]
-	serializer_class=PaymentCreateSerializer
+	serializer_class= PaymentCreateSerializer
 
 
 

@@ -5,8 +5,8 @@ from rest_framework.permissions import BasePermission
 class IsVender(BasePermission):
 	message = "user have to be a Vender"
 
-	def has_object_permission(self, request, view, obj):
-		if request.user.is_staff or obj.user.vender.exists():
+	def  has_permission(self, request, view):
+		if request.user.is_staff or hasattr(request.user, 'vender'):
 			return True
 
 		return False

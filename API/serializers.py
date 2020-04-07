@@ -41,7 +41,7 @@ class AddresCreateSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['name', 'image', ]
+        fields = "__all__"
 
 
 # ---  Auction Serializers   ----#

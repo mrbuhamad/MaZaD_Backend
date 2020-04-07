@@ -32,7 +32,7 @@ class Bidder(models.Model):
 
 
 class Vender(models.Model):
-	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='vender')
 
 	def __str__(self):
 		return self.user.username
@@ -90,13 +90,22 @@ class Item(models.Model):
 
 class Payment(models.Model):
 	Item = models.OneToOneField(Item, on_delete=models.CASCADE,null=True)
+	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
+	pyment_status=models.CharField(max_length=120)
+	pyment_Ip=models.CharField(max_length=120)
+	pyment_datetime=models.DateTimeField()
+
+
+	def __str__(self):
+		return self.bidder.name
+
+
+class AuctionCharg(models.Model):
 	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
 	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
 	pyment_status=models.CharField(max_length=120)
 	pyment_Ip=models.CharField(max_length=120)
 	pyment_datetime=models.DateTimeField()
-	choices = (("par_charge", "par_charge"), ("item_pyment", "item_pyment"))
-	pyment_type= models.CharField(max_length=12, choices=choices,null=True)
 
 	def __str__(self):
 		return self.bidder.name
@@ -143,18 +152,15 @@ def get_ended_at(instance, *args, **kwargs):
 
 #-------------- singnel to populate participant model  ------------- #
 
-@receiver(pre_save, sender=Item)
-def get_ended_at(instance, *args, **kwargs):
-	if instance.active==False:
-		instance.participant.create(bidder=instance.bidder ,auction=instance.auction)
+@receiver(pre_save, sender=AuctionCharg)
+def get_participant(instance, *args, **kwargs):
+		Participant.objects.create(bidder=instance.bidder ,auction=instance.auction)
 
 		
 
-
 #-------------- singnel to populate winner bid  ------------- #
-@receiver(pre_save, sender=Payment)
-def get_ended_at(instance, *args, **kwargs):
-	if instance.pyment_type=="par_charge":
+@receiver(pre_save, sender=Item)
+def get_wining_bid(instance, *args, **kwargs):
 		wining_bid=instance.bid_set.all().order_by('-bid_price')[0]
 		wining_bid.winner=True
 		wining_bid.save()
