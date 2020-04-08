@@ -149,7 +149,7 @@ class BidListView(RetrieveAPIView):
 
 
 class CreateBidView(CreateAPIView):
-	permission_classes= [IsVarifideBidder]    # ------------------  works
+	permission_classes= [IsAuthenticated, IsVarifideBidder]    # ------------------  works
 	serializer_class=CreateBidSerializer
 	
 	def perform_create(self, serializer):
@@ -158,12 +158,12 @@ class CreateBidView(CreateAPIView):
 
 
 class PaymentCreateView(CreateAPIView):            
-	permission_classes= [IsVender,IsAuctionOwner]   #----- what permissions do i need 
+	permission_classes= [IsAuthenticated]   #----- what permissions do i need 
 	serializer_class= PaymentCreateSerializer
 
 
-class ChargCreateView(CreateAPIView):            #----- what permissions do i need
-	permission_classes= [IsVender,IsAuctionOwner]
+class ChargCreateView(CreateAPIView):           
+	permission_classes= [IsAuthenticated]    #----- what permissions do i need
 	serializer_class= ChargCreateSerializer
 
 
