@@ -161,6 +161,7 @@ def get_participant(instance, *args, **kwargs):
 #-------------- singnel to populate winner bid  ------------- #
 @receiver(pre_save, sender=Item)
 def get_wining_bid(instance, *args, **kwargs):
+	if instance.active==False:
 		wining_bid=instance.bid_set.all().order_by('-bid_price')[0]
 		wining_bid.winner=True
 		wining_bid.save()

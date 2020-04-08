@@ -22,13 +22,13 @@ from .serializers import *
 # -----  user  views  ------#
 
 class UserCreateAPIView(CreateAPIView):
-	permission_class= [AllowAny]
+	permission_classes= [AllowAny]
 	serializer_class = UserCreateSerializer
 
 
 class AddresCreateAPIView(CreateAPIView):
 	serializer_class = AddresCreateSerializer
-	permission_class= [IsAuthenticated]
+	permission_classes= [IsAuthenticated]  
 	
 	def perform_create(self, serializer):
 		serializer.save(user=self.request.user)
@@ -36,7 +36,7 @@ class AddresCreateAPIView(CreateAPIView):
 # -----  Categor  views  ------#
 
 class CategoryView(ListAPIView):
-	permission_class= [AllowAny]
+	permission_classes= [AllowAny]
 	queryset = Category.objects.all()
 	serializer_class = CategorySerializer
 
@@ -46,14 +46,14 @@ class CategoryView(ListAPIView):
 # -----  Auction  views   ------#
 
 class AuctionListView(ListAPIView):
-	permission_class= [AllowAny]
+	permission_classes= [AllowAny]
 	queryset = Auction.objects.filter(start_date__gte=datetime.now()).order_by('start_date')
 	serializer_class = AuctionSerializer
 	
 
 
 class CreateAuctionView(CreateAPIView):
-	permission_classes= [IsVender]
+	permission_classeses= [IsAuthenticated, IsVender]     # ------------------  works 
 	serializer_class=CreateAuctionSerializer
 
 	def perform_create(self, serializer):
@@ -61,16 +61,17 @@ class CreateAuctionView(CreateAPIView):
 
 
 
+
 class AuctionStatusView(RetrieveUpdateAPIView):
-	permission_class= [IsVender]
-	queryset = Auction.objects.all()
+	permission_classes= [IsAuthenticated,IsVender,IsAuctionOwner]  # ------------------  works 
+	queryset = Auction.objects.all() 
 	serializer_class = AuctionStatusSerializer
 	lookup_field = 'id'
 	lookup_url_kwarg = 'auction_id'
 
 
 class AuctionUpdateView(RetrieveUpdateAPIView):
-	permission_class= [IsVender]
+	permission_classes= [IsAuthenticated,IsVender,IsAuctionOwner] # ------------------  works 
 	queryset = Auction.objects.all()
 	serializer_class = CreateAuctionSerializer
 	lookup_field = 'id'
@@ -81,7 +82,7 @@ class AuctionUpdateView(RetrieveUpdateAPIView):
 
 
 class DeleteAuctionView(DestroyAPIView):
-	permission_class= [IsVender]
+	permission_classes= [IsAuthenticated,IsVender,IsAuctionOwner] # ------------------  works 
 	queryset = Auction.objects.all()
 	serializer_class = AuctionSerializer
 	lookup_field = 'id'
@@ -96,7 +97,7 @@ class DeleteAuctionView(DestroyAPIView):
 # -----  item  views   ------#
 
 class ItemListView(RetrieveAPIView):
-	permission_class= [AllowAny]
+	permission_classes= [AllowAny]    # ------------------  works 
 	queryset = Auction.objects.all()
 	serializer_class = ItemListSerializer
 	lookup_field="id"
@@ -104,12 +105,13 @@ class ItemListView(RetrieveAPIView):
 
 
 class CreateItemView(CreateAPIView):
-	permission_class= [IsVender]
+	permission_classes= [IsAuthenticated,IsVender,CanCreateItem] # ------------------  works
 	serializer_class=CreateItemSerializer
 
 
-class ItemStatusView(RetrieveUpdateAPIView):
-	permission_class= [IsAuctionOwner]
+
+class ItemStatusView(RetrieveUpdateAPIView): 
+	permission_classes= [IsAuthenticated, IsVender,IsItemOwner] # ------------------  works
 	queryset = Item.objects.all()
 	serializer_class = ItemStatusSerializer
 	lookup_field = 'id'
@@ -117,7 +119,7 @@ class ItemStatusView(RetrieveUpdateAPIView):
 
 
 class ItemUpdateView(RetrieveUpdateAPIView):
-	permission_class= [IsAuctionOwner]
+	permission_classes= [IsAuthenticated, IsVender,IsItemOwner] # ------------------  works
 	queryset = Item.objects.all()
 	serializer_class = CreateItemSerializer
 	lookup_field = 'id'
@@ -125,7 +127,7 @@ class ItemUpdateView(RetrieveUpdateAPIView):
 
 
 class DeleteItemView(DestroyAPIView):
-	permission_class= [IsAuctionOwner]
+	permission_classes= [IsAuthenticated, IsVender,IsItemOwner] # ------------------  works
 	queryset = Item.objects.all()
 	serializer_class = ItemSerializer
 	lookup_field = 'id'
@@ -136,7 +138,7 @@ class DeleteItemView(DestroyAPIView):
 # -----  bid  views   ------#
 
 class BidListView(RetrieveAPIView):
-	permission_class= [AllowAny]
+	permission_classes= [AllowAny]
 	queryset = Item.objects.all()
 	serializer_class = BidListSerializer
 	lookup_field="id"
@@ -144,7 +146,7 @@ class BidListView(RetrieveAPIView):
 
 
 class CreateBidView(CreateAPIView):
-	permission_class= [IsVarifideBidder]
+	permission_classes= [IsVarifideBidder]    # this is not complete
 	serializer_class=CreateBidSerializer
 	
 	def perform_create(self, serializer):
@@ -152,8 +154,8 @@ class CreateBidView(CreateAPIView):
 
 
 
-class PaymentCreateView(CreateAPIView):
-	permission_class= [IsAuctionOwner]
+class PaymentCreateView(CreateAPIView):            # this is not complete 
+	permission_classes= [IsVender,IsAuctionOwner]
 	serializer_class= PaymentCreateSerializer
 
 
