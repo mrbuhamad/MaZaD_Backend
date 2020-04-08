@@ -22,7 +22,6 @@ class CanCreateItem(BasePermission):
 		user_id = getattr(request.user, 'id')
 		data =request.data['items']
 		auction_id = data[0]['auction']
-		print(auction_id)
 		if auction_id is not None:
 			auction_obj = Auction.objects.get(id=auction_id)
 			return user_id == auction_obj.vender.user.id
@@ -48,11 +47,16 @@ class IsItemOwner(BasePermission):
 
 		return False
 
-class IsVarifideBidder (BasePermission):                             # this is not complete
+class IsVarifideBidder (BasePermission):                           
 	message = "bidder have to provide a varified pyment info"
 
 	def  has_permission(self, request, view):
-		if request.user.is_staff or hasattr(request.user.bidder, 'participant'):
+		bidder_id = getattr(request.user.bidder, 'id')
+		item_id =request.data['item']
+		auction_obj=Item.objects.get(id=item_id).auction
+		bidder_obj= Bidder.objects.get(id=bidder_id)
+		Participant_Check=Participant.objects.filter(bidder=bidder_obj,auction=auction_obj).exists()
+		if request.user.is_staff or Participant:
 			return True
 		return False
 
