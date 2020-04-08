@@ -25,7 +25,7 @@ class Addres(models.Model):
 
 
 class Bidder(models.Model):
-	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='bidder')
 
 	def __str__(self):
 		return self.user.username
@@ -111,7 +111,7 @@ class AuctionCharg(models.Model):
 		return self.bidder.user.username
 
 class Participant(models.Model):
-	bidder= models.ForeignKey(Bidder, on_delete=models.CASCADE)
+	bidder= models.ForeignKey(Bidder, on_delete=models.CASCADE, related_name='participants')
 	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
 
 	def __str__(self):

@@ -19,7 +19,9 @@ from .models import *
 from .serializers import *
 
 
+
 # -----  user  views  ------#
+
 
 class UserCreateAPIView(CreateAPIView):
 	permission_classes= [AllowAny]
@@ -32,6 +34,7 @@ class AddresCreateAPIView(CreateAPIView):
 	
 	def perform_create(self, serializer):
 		serializer.save(user=self.request.user)
+
 
 # -----  Categor  views  ------#
 
@@ -146,7 +149,7 @@ class BidListView(RetrieveAPIView):
 
 
 class CreateBidView(CreateAPIView):
-	permission_classes= [IsVarifideBidder]    # this is not complete
+	permission_classes= [IsVarifideBidder]    # ------------------  works
 	serializer_class=CreateBidSerializer
 	
 	def perform_create(self, serializer):
