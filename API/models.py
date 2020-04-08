@@ -90,10 +90,12 @@ class Item(models.Model):
 
 class Payment(models.Model):
 	Item = models.OneToOneField(Item, on_delete=models.CASCADE,null=True)
-	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
-	pyment_status=models.CharField(max_length=120)
-	pyment_Ip=models.CharField(max_length=120)
-	pyment_datetime=models.DateTimeField()
+	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE,null=True)
+	status=models.BooleanField()
+	amount=models.models.DecimalField(max_digits=12, decimal_places=3)
+	paymentToken=models.IntegerField(null=True)
+	paymentId=models.CharField(max_length=120,null=True)
+	paidOn==models.DateTimeField(null=True)
 
 
 	def __str__(self):
@@ -103,9 +105,11 @@ class Payment(models.Model):
 class AuctionCharg(models.Model):
 	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
 	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
-	pyment_status=models.CharField(max_length=120)
-	pyment_Ip=models.CharField(max_length=120)
-	pyment_datetime=models.DateTimeField()
+	status=models.BooleanField()
+	amount=models.models.DecimalField(max_digits=12, decimal_places=3)
+	paymentToken=models.IntegerField(null=True)
+	paymentId=models.CharField(max_length=120,null=True)
+	paidOn==models.DateTimeField(null=True)
 
 	def __str__(self):
 		return self.bidder.user.username
@@ -154,6 +158,7 @@ def get_ended_at(instance, *args, **kwargs):
 
 @receiver(pre_save, sender=AuctionCharg)
 def get_participant(instance, *args, **kwargs):
+	if instance.status == True:
 		Participant.objects.create(bidder=instance.bidder ,auction=instance.auction)
 
 		
@@ -188,6 +193,7 @@ def get_winner(instance, *args, **kwargs):
 
 
 #-------------- singnel to delete part after auction end  ------------- #
+
 @receiver(pre_save, sender=Auction)
 def get_started_at(instance, *args, **kwargs):
 	if instance.active==False:

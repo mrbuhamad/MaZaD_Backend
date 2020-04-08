@@ -157,10 +157,14 @@ class CreateBidView(CreateAPIView):
 
 
 
-class PaymentCreateView(CreateAPIView):            # this is not complete 
-	permission_classes= [IsVender,IsAuctionOwner]
+class PaymentCreateView(CreateAPIView):            
+	permission_classes= [IsVender,IsAuctionOwner]   #----- what permissions do i need 
 	serializer_class= PaymentCreateSerializer
 
+
+class ChargCreateView(CreateAPIView):            #----- what permissions do i need
+	permission_classes= [IsVender,IsAuctionOwner]
+	serializer_class= ChargCreateSerializer
 
 
 	
