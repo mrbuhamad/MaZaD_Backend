@@ -107,11 +107,11 @@ class ItemListView(RetrieveAPIView):
 class CreateItemView(CreateAPIView):
 	permission_classes= [IsAuthenticated,IsVender,CanCreateItem] # ------------------  works
 	serializer_class=CreateItemSerializer
-	
 
 
-class ItemStatusView(RetrieveUpdateAPIView):
-	permission_classes= [IsVender,IsItemOwner]
+
+class ItemStatusView(RetrieveUpdateAPIView): 
+	permission_classes= [IsAuthenticated, IsVender,IsItemOwner] # ------------------  works
 	queryset = Item.objects.all()
 	serializer_class = ItemStatusSerializer
 	lookup_field = 'id'
@@ -119,7 +119,7 @@ class ItemStatusView(RetrieveUpdateAPIView):
 
 
 class ItemUpdateView(RetrieveUpdateAPIView):
-	permission_classes= [IsVender,IsItemOwner]
+	permission_classes= [IsAuthenticated, IsVender,IsItemOwner] # ------------------  works
 	queryset = Item.objects.all()
 	serializer_class = CreateItemSerializer
 	lookup_field = 'id'
@@ -127,7 +127,7 @@ class ItemUpdateView(RetrieveUpdateAPIView):
 
 
 class DeleteItemView(DestroyAPIView):
-	permission_classes= [IsVender,IsItemOwner]
+	permission_classes= [IsAuthenticated, IsVender,IsItemOwner] # ------------------  works
 	queryset = Item.objects.all()
 	serializer_class = ItemSerializer
 	lookup_field = 'id'
@@ -146,7 +146,7 @@ class BidListView(RetrieveAPIView):
 
 
 class CreateBidView(CreateAPIView):
-	permission_classes= [IsVarifideBidder]
+	permission_classes= [IsVarifideBidder]    # this is not complete
 	serializer_class=CreateBidSerializer
 	
 	def perform_create(self, serializer):
@@ -154,7 +154,7 @@ class CreateBidView(CreateAPIView):
 
 
 
-class PaymentCreateView(CreateAPIView):
+class PaymentCreateView(CreateAPIView):            # this is not complete 
 	permission_classes= [IsVender,IsAuctionOwner]
 	serializer_class= PaymentCreateSerializer
 

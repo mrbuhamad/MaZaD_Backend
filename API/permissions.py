@@ -48,9 +48,8 @@ class IsItemOwner(BasePermission):
 
 		return False
 
-class IsVarifideBidder (BasePermission):
+class IsVarifideBidder (BasePermission):                             # this is not complete
 	message = "bidder have to provide a varified pyment info"
-
 
 	def  has_permission(self, request, view):
 		if request.user.is_staff or hasattr(request.user.bidder, 'participant'):
