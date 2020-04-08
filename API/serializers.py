@@ -147,6 +147,11 @@ class CreateBidSerializer(serializers.ModelSerializer):
 
 class PaymentCreateSerializer(serializers.ModelSerializer):
     class  Meta:
-        model= Bid
+        model= Payment
         fields = "__all__"
   
+
+class ChargCreateSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= AuctionCharg1
+        fields = "__all__"

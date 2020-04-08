@@ -79,9 +79,19 @@ urlpatterns = [
     path('item/bid/create', CreateBidView.as_view(), name='bid_create'),
 
 
-    # bid create with the folowing requierd feild ['bid_price','item']
+
+
+    # # --------------------  bid urls   ---------------------#   
+
+    # payment create with the folowing requierd feild ['Item' 'bidder' 'status' 'amount' 'paymentToken' 'paymentId' 'paidOn' ]
+    # where 'status' 'amount' 'paymentToken' 'paymentId' 'paidOn' are reteved from paimant api
     path('item/payment/create', PaymentCreateView.as_view(), name='payment_create'),
     
+
+    # Charg create with the folowing requierd feild ['Item' 'bidder' 'status' 'amount' 'paymentToken' 'paymentId' 'paidOn' ]
+    # where 'status' 'amount' 'paymentToken' 'paymentId' 'paidOn' are reteved from paimant api
+    path('item/charg/create', ChargCreateView.as_view(), name='charg_create'),
+
     
     ]
 
