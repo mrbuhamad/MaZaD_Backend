@@ -187,4 +187,11 @@ def get_winner(instance, *args, **kwargs):
 #
 
 
+#-------------- singnel to delete part after auction end  ------------- #
+@receiver(pre_save, sender=Auction)
+def get_started_at(instance, *args, **kwargs):
+	if instance.active==False:
+		instance=Participant.objects.filter(auction=instance)
+		instance.delete()
+
 
