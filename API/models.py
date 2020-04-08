@@ -97,7 +97,7 @@ class Payment(models.Model):
 
 
 	def __str__(self):
-		return self.bidder.name
+		return self.bidder.user.username
 
 
 class AuctionCharg(models.Model):
@@ -108,14 +108,14 @@ class AuctionCharg(models.Model):
 	pyment_datetime=models.DateTimeField()
 
 	def __str__(self):
-		return self.bidder.name
+		return self.bidder.user.username
 
 class Participant(models.Model):
 	bidder= models.ForeignKey(Bidder, on_delete=models.CASCADE)
 	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
 
 	def __str__(self):
-		return self.bidder.name
+		return self.bidder.user.username
 
 
 class Bid(models.Model):
