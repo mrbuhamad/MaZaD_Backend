@@ -91,11 +91,11 @@ class Item(models.Model):
 class Payment(models.Model):
 	Item = models.OneToOneField(Item, on_delete=models.CASCADE,null=True)
 	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE,null=True)
-	status=models.BooleanField()
-	amount=models.models.DecimalField(max_digits=12, decimal_places=3)
+	status=models.BooleanField(null=True)
+	amount=models.DecimalField(max_digits=12, decimal_places=3,null=True)
 	paymentToken=models.IntegerField(null=True)
 	paymentId=models.CharField(max_length=120,null=True)
-	paidOn==models.DateTimeField(null=True)
+	paidOn=models.DateTimeField(null=True)
 
 
 	def __str__(self):
@@ -104,12 +104,12 @@ class Payment(models.Model):
 
 class AuctionCharg(models.Model):
 	auction = models.ForeignKey(Auction, on_delete=models.CASCADE,null=True)
-	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
-	status=models.BooleanField()
-	amount=models.models.DecimalField(max_digits=12, decimal_places=3)
+	bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE,null=True)
+	status=models.BooleanField(null=True)
+	amount=models.DecimalField(max_digits=12, decimal_places=3,null=True)
 	paymentToken=models.IntegerField(null=True)
 	paymentId=models.CharField(max_length=120,null=True)
-	paidOn==models.DateTimeField(null=True)
+	paidOn=models.DateTimeField(null=True)
 
 	def __str__(self):
 		return self.bidder.user.username

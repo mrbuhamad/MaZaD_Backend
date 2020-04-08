@@ -153,5 +153,5 @@ class PaymentCreateSerializer(serializers.ModelSerializer):
 
 class ChargCreateSerializer(serializers.ModelSerializer):
     class  Meta:
-        model= AuctionCharg1
+        model= AuctionCharg
         fields = "__all__"
