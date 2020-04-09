@@ -5,6 +5,7 @@ RetrieveAPIView,
 RetrieveUpdateAPIView,
 DestroyAPIView)
 from datetime import datetime
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 # permissions
 from rest_framework.permissions import(
@@ -21,6 +22,10 @@ from .serializers import *
 
 
 # -----  user  views  ------#
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 class UserCreateAPIView(CreateAPIView):

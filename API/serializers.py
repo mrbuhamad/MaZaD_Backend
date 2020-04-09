@@ -1,10 +1,29 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from datetime import date
 
 # Models
 from .models import *
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+    def validate(self, attr):
+        data=super().validate(attr)
+        token=self.get_token(self.user)
+        data['user_id'] = self.user.id
+        data['username'] = str(self.user)
+        data['first_name'] = self.user.first_name
+        data['last_name'] = self.user.last_name
+        data['email'] = self.user.email
+        if hasattr(self.user, 'vender'):
+            data['user_type'] = 'vender'
+        else:
+            data['user_type'] = 'bidder'
+        return data
+
 
 class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
