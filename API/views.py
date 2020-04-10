@@ -4,7 +4,7 @@ ListAPIView,
 RetrieveAPIView,
 RetrieveUpdateAPIView,
 DestroyAPIView)
-from datetime import datetime
+from datetime import datetime, timedelta
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 # permissions
@@ -55,7 +55,7 @@ class CategoryView(ListAPIView):
 
 class AuctionListView(ListAPIView):
 	permission_classes= [AllowAny]
-	queryset = Auction.objects.filter(start_date__gte=datetime.now()).order_by('start_date')
+	queryset = Auction.objects.filter(start_date__gte=(datetime.now()-timedelta(hours=1))).order_by('start_date')
 	serializer_class = AuctionSerializer
 	
 
