@@ -19,9 +19,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['last_name'] = self.user.last_name
         data['email'] = self.user.email
         if hasattr(self.user, 'vender'):
-            data['user_type'] = 'vender'
+            data['is_vender'] = True
         else:
-            data['user_type'] = 'bidder'
+            data['is_vender'] = False
         return data
 
 
