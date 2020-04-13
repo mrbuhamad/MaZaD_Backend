@@ -49,17 +49,9 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
 
 class AddresCreateSerializer(serializers.ModelSerializer):
-     user=serializers.SerializerMethodField()
-
-    class Meta:
-        model = Auction
-        fields = ['id','title','description','start_date','active','req_deposit','started_at','ended_at','category','user']        
-
-    def get_user(self,obj):
-        print(User.objects.get(vender=obj.vender))
-        user_obj=User.objects.get(vender=obj.vender)
-        userId=user_obj.id
-        return userId
+       class Meta:
+        model = Addres
+        exclude = ['user']
 
 
 
@@ -74,9 +66,17 @@ class CategorySerializer(serializers.ModelSerializer):
 # ---  Auction Serializers   ----#
 
 class AuctionSerializer(serializers.ModelSerializer):
+    user=serializers.SerializerMethodField()
+
     class Meta:
         model = Auction
-        fields = "__all__"
+        fields = ['id','title','description','start_date','active','req_deposit','started_at','ended_at','category','user']        
+
+    def get_user(self,obj):
+        print(User.objects.get(vender=obj.vender))
+        user_obj=User.objects.get(vender=obj.vender)
+        userId=user_obj.id
+        return userId
 
 
 class CreateAuctionSerializer(serializers.ModelSerializer):
