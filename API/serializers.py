@@ -27,7 +27,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    vender=vender=serializers.BooleanField()
+    vender = serializers.BooleanField()
     class Meta:
         model = User
         fields = ['username','password','first_name','last_name','email','vender']
