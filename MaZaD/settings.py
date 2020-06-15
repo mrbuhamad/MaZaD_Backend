@@ -23,10 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'cwe*83d35s7z_!fh^lh=^rh@s*3_9owu6rc2_8oue!p#6uciws'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['167.172.181.131']
+# ALLOWED_HOSTS = ['167.172.181.131']
 
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -88,17 +89,24 @@ SIMPLE_JWT = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME':'django',
+#         'USER':'django',
+#         'PASSWORD':'9ec034a004293b920a0cf9fd19d56d68',
+#         'HOST':'localhost',
+#         'PORT':'',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'django',
-        'USER':'django',
-        'PASSWORD':'9ec034a004293b920a0cf9fd19d56d68',
-        'HOST':'localhost',
-        'PORT':'',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 
 # Password validation

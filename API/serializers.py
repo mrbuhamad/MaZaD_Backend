@@ -200,20 +200,22 @@ class SubscribersSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class SubscribersListSerializer(serializers.ModelSerializer):
-    Sub_List=SubscribersSerializer(many=True)
+class SubscribersListSerializer(serializers.Serializer):
     click_count=serializers.SerializerMethodField()
     Sub_count=serializers.SerializerMethodField()
+    subscribers=serializers.SerializerMethodField()
 
-    class  Meta:
-        model= Subscribers
-        fields = ['click_count','Sub_count',"Sub_List"]
+    def get_subscribers(self,obj):
+        subscribers=Subscribers.objects.all()
+        return SubscribersSerializer(subscribers, many=True).data
+
+    
 
     def get_click_count(self,obj):
-        click=obj.loan.all().count()
+        click=Clickes.objects.all().count()
         return click
 
     def get_Sub_count(self,obj):
-        Sub=obj.loan.all().count()
+        Sub=Subscribers.objects.all().count()
         return Sub
 

@@ -6,6 +6,8 @@ RetrieveUpdateAPIView,
 DestroyAPIView)
 from datetime import datetime, timedelta
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # permissions
 from rest_framework.permissions import(
@@ -179,11 +181,20 @@ class ClickesAPIView(CreateAPIView):
 	permission_classes= [AllowAny]
 	serializer_class = ClickesSerializer
 
+
 class SubscribersAPIView(CreateAPIView):
 	permission_classes= [AllowAny]
 	serializer_class = SubscribersSerializer
 
-class LandingPageView(ListAPIView):
-	permission_classes= [AllowAny]
-	queryset = Subscribers.objects.all()
-	serializer_class = SubscribersListSerializer
+
+# class LandingPageView(ListAPIView):
+# 	permission_classes= [AllowAny]
+# 	queryset = Subscribers.objects.all()
+# 	serializer_class = SubscribersListSerializer
+
+
+class LandingPageView(APIView):
+	def get(self, request):
+		serializer = SubscribersListSerializer(self)
+		return Response(serializer.data)
+		
