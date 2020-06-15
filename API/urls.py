@@ -92,7 +92,12 @@ urlpatterns = [
     # where 'status' 'amount' 'paymentToken' 'paymentId' 'paidOn' are reteved from paimant api
     path('item/charg/create', ChargCreateView.as_view(), name='charg_create'),
 
-    
+
+    # # --------------------  landing page urls   ---------------------#   
+    path('clickes/create', ClickesAPIView.as_view(), name='Clickes_create'),
+    path('subscriber/create', SubscribersAPIView.as_view(), name='Subscriber_create'),
+
+
     ]
 
     

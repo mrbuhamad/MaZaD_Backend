@@ -172,4 +172,13 @@ class ChargCreateView(CreateAPIView):
 	serializer_class= ChargCreateSerializer
 
 
+# -----  landing page  views   ------#
 	
+
+class ClickesAPIView(CreateAPIView):
+	permission_classes= [AllowAny]
+	serializer_class = ClickesSerializer
+
+class SubscribersAPIView(CreateAPIView):
+	permission_classes= [AllowAny]
+	serializer_class = SubscribersSerializer

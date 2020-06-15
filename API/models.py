@@ -139,6 +139,22 @@ class Bid(models.Model):
 		return "%s KD" % self.price
 
 
+#-------------- landing page modal  ------------- #
+# 
+class Clickes(models.Model):
+	name= models.BooleanField (default=False)
+	
+
+	def __str__(self):
+		return self.name
+
+class Subscribers(models.Model):
+	name= models.CharField(max_length=120,null=True,blank=True)
+	email = models.CharField(max_length=120)
+
+	def __str__(self):
+		return self.name
+
 
 
 #-------------- singnel to populate Auction.started_at & ended_at  ------------- #

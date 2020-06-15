@@ -178,7 +178,24 @@ class PaymentCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
   
 
+
 class ChargCreateSerializer(serializers.ModelSerializer):
     class  Meta:
         model= AuctionCharg
         fields = "__all__"
+
+
+
+# -----  landing page Serializers   ------#
+
+class ClickesSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Clickes
+        fields = "__all__"
+
+
+class SubscribersSerializer(serializers.ModelSerializer):
+    class  Meta:
+        model= Subscribers
+        fields = "__all__"
+
