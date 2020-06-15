@@ -182,3 +182,8 @@ class ClickesAPIView(CreateAPIView):
 class SubscribersAPIView(CreateAPIView):
 	permission_classes= [AllowAny]
 	serializer_class = SubscribersSerializer
+
+class LandingPageView(ListAPIView):
+	permission_classes= [AllowAny]
+	queryset = Subscribers.objects.all()
+	serializer_class = SubscribersListSerializer

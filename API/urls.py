@@ -94,8 +94,10 @@ urlpatterns = [
 
 
     # # --------------------  landing page urls   ---------------------#   
-    path('clickes/create', ClickesAPIView.as_view(), name='Clickes_create'),
-    path('subscriber/create', SubscribersAPIView.as_view(), name='Subscriber_create'),
+    path('clickes/create', ClickesAPIView.as_view(), name='clickes_create'),
+    path('subscriber/create', SubscribersAPIView.as_view(), name='subscriber_create'),
+
+    path('subscribers', LandingPageView.as_view(), name='subscribers_create'),
 
 
     ]

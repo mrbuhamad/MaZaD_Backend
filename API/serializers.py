@@ -199,3 +199,21 @@ class SubscribersSerializer(serializers.ModelSerializer):
         model= Subscribers
         fields = "__all__"
 
+
+class SubscribersListSerializer(serializers.ModelSerializer):
+    Sub_List=SubscribersSerializer(many=True)
+    click_count=serializers.SerializerMethodField()
+    Sub_count=serializers.SerializerMethodField()
+
+    class  Meta:
+        model= Subscribers
+        fields = ['click_count','Sub_count',"Sub_List"]
+
+    def get_click_count(self,obj):
+        click=obj.loan.all().count()
+        return click
+
+    def get_Sub_count(self,obj):
+        Sub=obj.loan.all().count()
+        return Sub
+
