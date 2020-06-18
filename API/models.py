@@ -142,19 +142,16 @@ class Bid(models.Model):
 #-------------- landing page modal  ------------- #
 # 
 class Clickes(models.Model):
-	name= models.BooleanField (default=False)
+	status= models.BooleanField (default=False)
 	
-	def __str__(self):
-		return self.name
-
+	
 
 class Subscribers(models.Model):
-	name= models.CharField(max_length=120,null=True,blank=True)
-	email = models.CharField(max_length=120)
+	email = models.EmailField(max_length=254)
 	created_on = models.DateTimeField(auto_now_add=True,null=True,blank=True)
 
 	def __str__(self):
-		return self.name
+		return self.email
 
 
 
@@ -218,3 +215,15 @@ def get_started_at(instance, *args, **kwargs):
 		instance.delete()
 
 
+
+
+@receiver(post_save, sender=Subscribers)
+def get_Subscribers(instance,created, *args, **kwargs):
+	if created:
+		Bidder_Email=instance.email
+		send_mail(
+   		'Thank you from LiveMazad.co',
+    	'Thank you for sunscribing with us we will let you know of any new updates',
+   		settings.EMAIL_HOST_USER,
+    	[Bidder_Email],
+   		fail_silently=False,
