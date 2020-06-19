@@ -156,7 +156,7 @@ class Subscribers(models.Model):
 class Question(models.Model):
 	name = models.CharField(max_length=120)
 	email = models.EmailField(max_length=254)
-	message=models.CharField(null=True,blank=True)
+	message=models.TextField(null=True,blank=True)
 	created_on = models.DateTimeField(auto_now_add=True,null=True,blank=True)
 
 
