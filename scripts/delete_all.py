@@ -1,15 +1,14 @@
-from API.models import *
+from API.models import Clickes,Subscribers
 
 def run():
 
-    Clickes = Clickes.objects.all()
-    Subscribers=Subscribers.objects.all()
+    clickes = Clickes.objects.all()
+    subscribers=Subscribers.objects.all()
    
 
-    for i in Clickes:
+    for i in clickes:
         i.delete()
 
-    for i in Subscribers:
+    for i in subscribers:
         i.delete()
-
 

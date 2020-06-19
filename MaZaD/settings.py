@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'API',
+    'django_extensions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -159,6 +161,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+# from API.models import *
+
+# def run():
+
+#     Clickes = Clickes.objects.all()
+#     Subscribers=Subscribers.objects.all()
+   
+
+#     for i in Clickes:
+#         i.delete()
+
+#     for i in Subscribers:
+#         i.delete()
 
 
 
