@@ -227,3 +227,4 @@ def get_Subscribers(instance,created, *args, **kwargs):
    		settings.EMAIL_HOST_USER,
     	[Bidder_Email],
    		fail_silently=False,
+)
