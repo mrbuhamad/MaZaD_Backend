@@ -187,14 +187,19 @@ class SubscribersAPIView(CreateAPIView):
 	serializer_class = SubscribersSerializer
 
 
-# class LandingPageView(ListAPIView):
-# 	permission_classes= [AllowAny]
-# 	queryset = Subscribers.objects.all()
-# 	serializer_class = SubscribersListSerializer
+class QuestionAPIView(CreateAPIView):
+	permission_classes= [AllowAny]
+	serializer_class = QuestionSerializer
 
 
 class LandingPageView(APIView):
 	def get(self, request):
 		serializer = SubscribersListSerializer(self)
 		return Response(serializer.data)
-		
+
+
+class QuestionListAPIView(ListAPIView):
+	permission_classes= [AllowAny]
+	queryset = Question.objects.all()
+	serializer_class = QuestionSerializer
+	

@@ -153,6 +153,12 @@ class Subscribers(models.Model):
 	def __str__(self):
 		return self.email
 
+class Question(models.Model):
+	name = models.CharField(max_length=120)
+	email = models.EmailField(max_length=254)
+	message=models.CharField(null=True,blank=True)
+	created_on = models.DateTimeField(auto_now_add=True,null=True,blank=True)
+
 
 
 #-------------- singnel to populate Auction.started_at & ended_at  ------------- #
@@ -217,13 +223,13 @@ def get_started_at(instance, *args, **kwargs):
 
 
 
-@receiver(post_save, sender=Subscribers)
+@receiver(post_save, sender=Question)
 def get_Subscribers(instance,created, *args, **kwargs):
 	if created:
 		Bidder_Email=instance.email
 		send_mail(
    		'Thank you from LiveMazad.co',
-    	'Thank you for sunscribing with us we will let you know of any new updates',
+    	'Thank you for contacting  us. we will let you know of any new updates',
    		settings.EMAIL_HOST_USER,
     	[Bidder_Email],
    		fail_silently=False,

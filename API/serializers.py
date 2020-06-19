@@ -219,3 +219,8 @@ class SubscribersListSerializer(serializers.Serializer):
         Sub=Subscribers.objects.all().count()
         return Sub
 
+class QuestionAPIView(serializers.ModelSerializer):
+    class  Meta:
+        model= Question
+        fields = "__all__"
+

@@ -100,6 +100,10 @@ urlpatterns = [
     path('subscribers/', LandingPageView.as_view(), name='subscribers_create'),
 
 
+    # Charg create with the folowing requierd feild ['name' 'email' 'message' ]
+    path('questions/create', QuestionAPIView.as_view(), name='question_create'),
+    path('questions/', QuestionListAPIView.as_view(), name='question_list'),
+
     ]
 
     
