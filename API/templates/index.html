@@ -155,7 +155,7 @@
     <!-- pre-header end -->
     <!-- header -->
     <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff">
-    <img src="./head.png" class="card-img-top" alt="live mazad email head" border="0" width="100%" cellpadding="0" cellspacing="0">
+    <img src="{% static 'head.png' %}" class="card-img-top" alt="live mazad email head" border="0" width="100%" cellpadding="0" cellspacing="0">
 
         <tr>
             <td align="center">
@@ -258,7 +258,7 @@
 
                                         <p style="line-height: 24px; margin-bottom:15px;">
 
-                                            Firstname,
+                                            {{name}},
 
                                         </p>
                                           <p style="line-height: 24px;margin-bottom:15px;">
@@ -429,7 +429,8 @@
                                             <tr>
                                                 <!-- logo -->
                                                 <td align="left">
-                                                    <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 100px;" src="./logo_transparent_background.png" alt="" /></a>
+                                                    <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 100px;" src="{% static 'logo_transparent_background.png' %}" alt=" logo" /></a>
+                                                    head
                                                 </td>
                                             </tr>
 
@@ -490,15 +491,18 @@
                                                       
                                                         <tr mx-3>
                                                             <td py-3>
-                                                            <a href="https://instagram.com/live.mazad?igshid=6uo08bosv2ya" style="padding: 20px; display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="./instagram-brands.svg" alt=""></a>
+                                                            <a href="https://instagram.com/live.mazad?igshid=6uo08bosv2ya" style="padding: 20px; display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="{% static 'sinstagram-brands.svg' %}" alt="instagram"></a>
+
                                                             </td>
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                             <td>
-                                                                <a href="https://twitter.com/live_mazad" style="padding: 20px; display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="./twitter-brands.svg" alt=""></a>
+                                                                <a href="https://twitter.com/live_mazad" style="padding: 20px; display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="{% static 'twitter-brands.svg' %}" alt="twitter"></a>
+
                                                             </td>
                                                             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                             <td>
-                                                                <a href="..." style="padding: 20px; display: block; border-style: none !important; border: 0 !important;"><img width="14" border="0" style="display: block;" src="./facebook-f-brands.svg" alt=""></a>
+                                                                <a href="..." style="padding: 20px; display: block; border-style: none !important; border: 0 !important;"><img width="14" border="0" style="display: block;" src="{% static 'facebook-f-brands.svg' %}" alt="twitter"></a>
+                                                                
                                                             </td>
                                                         </tr>
                                                     </table>
