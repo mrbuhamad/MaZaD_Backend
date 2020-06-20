@@ -223,7 +223,7 @@ def get_started_at(instance, *args, **kwargs):
 
 
 
-@receiver(pre_save, sender=Question)
+@receiver(post_save, sender=Question)
 def get_Subscribers(instance,created, *args, **kwargs):
 	if created:
 		Bidder_Email=instance.email
