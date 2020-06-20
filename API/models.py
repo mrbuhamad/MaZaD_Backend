@@ -223,7 +223,7 @@ def get_started_at(instance, *args, **kwargs):
 
 
 
-@receiver(post_save, sender=Question)
+@receiver(pre_save, sender=Question)
 def get_Subscribers(instance,created, *args, **kwargs):
 	if created:
 		Bidder_Email=instance.email
@@ -233,4 +233,8 @@ def get_Subscribers(instance,created, *args, **kwargs):
    		settings.EMAIL_HOST_USER,
     	[Bidder_Email],
    		fail_silently=False,
+   		auth_user=None,
+   		auth_password=None,
+   		connection=None,
+   		html_message='<p>This is an <strong>important</strong> message.</p>'
 )
