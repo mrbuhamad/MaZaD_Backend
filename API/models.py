@@ -5,6 +5,10 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
+from django.template.loader import render_to_string
+
+
+
 
 # Create your models here.
 
@@ -236,5 +240,5 @@ def get_Subscribers(instance,created, *args, **kwargs):
    		auth_user=None,
    		auth_password=None,
    		connection=None,
-   		html_message='<p>This is an <strong>important</strong> message.</p>'
+   		html_message=render_to_string('index.html', {'name':instance.name})
 )
