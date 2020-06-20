@@ -239,5 +239,5 @@ def get_Subscribers(instance,created, *args, **kwargs):
    		auth_user=None,
    		auth_password=None,
    		connection=None,
-   		html_message=render('index.html', {'name':instance.name})
+   		html_message=render(request,'index.html', {'name':instance.name})
 )
