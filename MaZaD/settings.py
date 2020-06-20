@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'cwe*83d35s7z_!fh^lh=^rh@s*3_9owu6rc2_8oue!p#6uciws'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['167.172.181.131']
 
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -164,20 +164,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
-
-# from API.models import *
-
-# def run():
-
-#     Clickes = Clickes.objects.all()
-#     Subscribers=Subscribers.objects.all()
-   
-
-#     for i in Clickes:
-#         i.delete()
-
-#     for i in Subscribers:
-#         i.delete()
 
 
 
