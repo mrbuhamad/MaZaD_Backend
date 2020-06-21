@@ -22,6 +22,9 @@ from .models import *
 from .serializers import *
 
 
+from django.shortcuts import render
+
+
 
 # -----  user  views  ------#
 
@@ -207,3 +210,8 @@ class QuestionListAPIView(ListAPIView):
 
 
 
+def test(request):
+    context = {
+        "name": "mohammad"
+        }
+    return render(request, 'index.html', context)
