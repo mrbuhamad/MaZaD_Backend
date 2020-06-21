@@ -1,4 +1,4 @@
-from API.models import Clickes,Subscribers
+from API.models import Clickes,Subscribers,Question
 
 def run():
 
