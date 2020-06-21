@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'cwe*83d35s7z_!fh^lh=^rh@s*3_9owu6rc2_8oue!p#6uciws'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['167.172.181.131']
 
@@ -144,6 +144,7 @@ USE_L10N = True
 USE_TZ = True
 
 
+## ---- email config for gmail  ----  ##
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
@@ -159,6 +160,8 @@ EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = 'livemazad@outlook.com'
 EMAIL_HOST_PASSWORD = 'mazad2020'
 EMAIL_PORT = 25
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
