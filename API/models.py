@@ -149,7 +149,7 @@ class Clickes(models.Model):
 	created_on = models.DateTimeField(auto_now_add=True,null=True,blank=True)
 
 	def __str__(self):
-		return self.email
+		return self.created_on
 	
 	
 
