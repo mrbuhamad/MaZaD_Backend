@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'API',
     'django_extensions',
     'corsheaders',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -166,14 +167,20 @@ EMAIL_PORT = 25
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS=[
- os.path.join(BASE_DIR, 'static')
-]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+AWS_ACCESS_KEY_ID = 'IKDW66QEBJXPFUIXLIDE'
+AWS_SECRET_ACCESS_KEY = 'opD9faZf0H90lQRrOaWbbC7g25N2f4wz31w4Xk6Io88'
+AWS_STORAGE_BUCKET_NAME = 'mazadspace'
+AWS_S3_ENDPOINT_URL = 'https://nyc3.digitaloceanspaces.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'space-static'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'mysite/static'),
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 
